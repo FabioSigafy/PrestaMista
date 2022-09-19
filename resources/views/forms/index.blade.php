@@ -67,19 +67,6 @@
                     <div class="py-4 justify-content-center d-flex">
                         {{ $form->appends(request()->query())->links() }}
                     </div>
-
-                    {{-- <script>
-                        var btn = document.getElementById('btn-div');
-                        var container = document.querySelector('.registro');
-                        btn.addEventListener('click', function() {
-
-                            if (container.style.display === 'block') {
-                                container.style.display = 'none';
-                            } else {
-                                container.style.display = 'block';
-                            }
-                        });
-                    </script> --}}
                 </div>
             </div>
         </div>

@@ -10,6 +10,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 use League\CommonMark\Node\Block\Document;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Auth;
 
 class FormController extends Controller
 {
@@ -37,7 +38,18 @@ class FormController extends Controller
             'form' => $form
         ]);
     }
+    public function auth(Request $request)
+    {
 
+        $data =  $request->all();
+        $remmenber =  isset($data['lembrar']) ? true : false;
+
+        if(Auth::attempt(['email' => $data['email'], 'password' => $data['password']], $remmenber)){
+            return redirect('/');
+        }else{
+            return redirect('/');
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *
