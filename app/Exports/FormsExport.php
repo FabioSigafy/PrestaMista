@@ -13,7 +13,7 @@ class FormsExport implements FromCollection, WithHeadings, WithEvents
 {
     public function collection()
     {
-        return Form::select('document', 'documentRegistry', 'name', DB::raw('DATE_FORMAT(date, "%d/%m/%Y") AS date'), 'deathcover')->get();
+        return Form::select('document', 'documentRegistry', 'name', DB::raw('DATE_FORMAT(date, "%d/%m/%Y") AS date'), 'deathcover')->where('inactive','=','0')->get();
     }
 
     public function headings(): array

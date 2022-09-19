@@ -15,6 +15,6 @@ class form extends Model
         'name',
         'date',
         'deathcover',
-
+        'inactive'
     ];
 }

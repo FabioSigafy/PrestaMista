@@ -76,6 +76,7 @@ class FormController extends Controller
                     'name' => $request->name,
                     'date' => $request->date,
                     'deathcover' => $request->deathcover,
+                    'inactive' => 0
                 ]);
             } catch (Exception $e) {
                 $errors[] = 'Erro ao cadastrar'.$e->getMessage() ;
@@ -159,7 +160,8 @@ class FormController extends Controller
                     'documentRegistry' => $request->document,
                     'name' => $request->name,
                     'date' => $request->date,
-                    'deathcover' =>$request->deathcover
+                    'deathcover' =>$request->deathcover,
+                    'inactive' => $request->inactive
                 ]);
             } catch (Exception $e) {
                 $errors[] = 'Erro ao alterar prestamista no banco de dados';

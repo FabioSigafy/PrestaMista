@@ -22,14 +22,14 @@
 
                             </div>
                     </form>
-{{--
-                    @if (Auth::user()->{"user-master"} == 0)
+                    {{-- @if (Auth::user()->{"user-master"} == 0)
                         return redirect('forms')
                     @endif --}}
 
                     <table class="table table-striped ">
                         <thead>
                             <tr>
+                                <th>Status </th>
                                 <th>CPF </th>
                                 <th>Nome</th>
                                 <th>Data de nasc.</th>
@@ -38,21 +38,23 @@
                             </tr>
                         </thead>
                         @foreach ($form as $segurado)
+                            @php
+                                $classOpacity = $segurado->inactive ? 'opacity-25' : '';
+                                $classColor = $segurado->inactive ? 'col-12 btn btn-outline-primary' : 'col-12 btn btn-outline-warning';
+                            @endphp
+
                             <tr class="registro">
-                                <td>{{ $segurado->document }}</td>
-                                <td>{{ $segurado->name }}</td>
-                                <td>{{ $segurado->date }} </td>
-                                <td>{{ $segurado->deathcover }} </td>
-                                <td>{{ date('H:i:s d/m/Y', strtotime($segurado->created_at)) }}</td>
+                                <td class="{{ $classOpacity }}">{{ $segurado->inactive == 0 ? 'Ativado' : 'Desativado' }}
+                                </td>
+                                <td class="{{ $classOpacity }}">{{ $segurado->document }}</td>
+                                <td class="{{ $classOpacity }}">{{ $segurado->name }}</td>
+                                <td class="{{ $classOpacity }}">{{ $segurado->date }} </td>
+                                <td class="{{ $classOpacity }}">{{ $segurado->deathcover }} </td>
+                                <td class="{{ $classOpacity }}">
+                                    {{ date('H:i:s d/m/Y', strtotime($segurado->created_at)) }}</td>
 
-                                @if (Auth::user()->{"user-master"} == 1)
-                                    <td><a class=" col-12 btn btn-outline-danger "
-                                            {{-- href="{{ route('forms.inactive', [$segurado->id]) }}" --}}
-                                            >Inativar
-                                        </a></td>
-                                @endif
 
-                                <td><a class=" col-12 btn btn-outline-warning "
+                                <td><a class="{{ $classColor }}"
                                         href="{{ route('forms.edit', [$segurado->id]) }}">Editar</a></td>
 
                             </tr>

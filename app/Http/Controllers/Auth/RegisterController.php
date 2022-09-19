@@ -40,15 +40,15 @@ class RegisterController extends Controller
     public function __construct()
 
     {
-        //  $this->middleware('guest');
-        $this->middleware('auth');
-        $this->middleware(function ($request, $next) {
+         $this->middleware('guest');
+        // $this->middleware('auth');
+        // $this->middleware(function ($request, $next) {
 
 
-            $this->usuario = auth()->user(); //Aqui você pega o usuario logado
+        //     $this->usuario = auth()->user(); //Aqui você pega o usuario logado
 
-            return $next($request);
-        });
+        //     return $next($request);
+        // });
     }
 
     /**

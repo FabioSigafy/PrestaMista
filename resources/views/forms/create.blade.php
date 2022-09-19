@@ -25,6 +25,9 @@
                                 <label for="deathcover" class="form-label">Capital</label>
                                 <input type="text" class="form-control mask-money" name="deathcover" id="deathcover">
                             </div>
+
+
+
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                 <button type="submit" class="btn btn-outline-primary">Enviar</button>
                             </div>

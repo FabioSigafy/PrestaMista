@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('documentRegistry');
             $table->text('name');
             $table->date('date');
+            $table->integer('inactive');
             $table->string('deathcover');
             $table->timestamps();
         });
