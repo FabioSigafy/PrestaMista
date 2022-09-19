@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -40,12 +41,10 @@ class RegisterController extends Controller
     public function __construct()
 
     {
-        //  $this->middleware('guest');
+        // $this->middleware('guest');
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
-
-
-            $this->usuario = auth()->user(); //Aqui você pega o usuario logado
+            $this->user = auth()->user(); //Aqui você pega o usuario logado
 
             return $next($request);
         });
@@ -83,10 +82,8 @@ class RegisterController extends Controller
 
         ]);
     }
-    private $usuario;
-
     public function index()
     {
-        $permission = User::where('user_id', $this->usuario->id)->get(); // Com isso você vai sempre buscar (como no meu caso) os serviços do usuário logado, ou seja, nessa rota cada usuário só vai conseguir ver seus serviços
+        $servico = Auth::where('user_id', $this->usuario->id)->get(); // Com isso você vai sempre buscar (como no meu caso) os serviços do usuário logado, ou seja, nessa rota cada usuário só vai conseguir ver seus serviços
     }
 }

@@ -45,13 +45,6 @@
                                 <td>{{ $segurado->deathcover }} </td>
                                 <td>{{ date('H:i:s d/m/Y', strtotime($segurado->created_at)) }}</td>
 
-                                @if (Auth::user()->{"user-master"} == 1)
-                                    <td><a class=" col-12 btn btn-outline-danger "
-                                            {{-- href="{{ route('forms.inactive', [$segurado->id]) }}" --}}
-                                            >Inativar
-                                        </a></td>
-                                @endif
-
                                 <td><a class=" col-12 btn btn-outline-warning "
                                         href="{{ route('forms.edit', [$segurado->id]) }}">Editar</a></td>
 
@@ -65,19 +58,6 @@
                     <div class="py-4 justify-content-center d-flex">
                         {{ $form->appends(request()->query())->links() }}
                     </div>
-
-                    {{-- <script>
-                        var btn = document.getElementById('btn-div');
-                        var container = document.querySelector('.registro');
-                        btn.addEventListener('click', function() {
-
-                            if (container.style.display === 'block') {
-                                container.style.display = 'none';
-                            } else {
-                                container.style.display = 'block';
-                            }
-                        });
-                    </script> --}}
                 </div>
             </div>
         </div>
