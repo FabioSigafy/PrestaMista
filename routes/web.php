@@ -18,31 +18,7 @@ Route::group(['Middleware' => 'auth'], function () {
 //     return view('auth.register');
 // })->middleware(Accesmaster::class);
 
-<<<<<<< HEAD
 
-
-// Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-// Route::post('login', 'Auth\LoginController@login');
-
-// Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-
-// Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-// Route::post('register', 'Auth\RegisterController@register');
-
-// Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-// Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-// Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-// Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
-
-// Route::get('password/confirm', 'Auth\ConfirmPasswordController@showConfirmForm')->name('password.confirm');
-// Route::post('password/confirm', 'Auth\ConfirmPasswordController@confirm');
-
-// Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
-// Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
-// Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
-
-=======
->>>>>>> 3a8fcceedb10ddf6d547e18c4bef9556b2c2a018
 Auth::routes();
 
 Route::get('forms-export', [FormController::class, 'export'])->name('excel');
