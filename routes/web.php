@@ -13,13 +13,12 @@ Route::get('/', function () {
 Route::group(['Middleware' => 'auth'], function () {
 
     Route::resource('/forms', FormController::class);
+
+
 });
-// Route::get('/register', function () {
-//     return view('auth.register');
-// })->middleware(Accesmaster::class);
-
-
 Auth::routes();
+
+
 
 Route::get('forms-export', [FormController::class, 'export'])->name('excel');
 

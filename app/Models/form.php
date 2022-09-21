@@ -15,6 +15,7 @@ class form extends Model
         'name',
         'date',
         'deathcover',
-        'inactive'
+        'inactive',
+        'created_user_id'
     ];
 }

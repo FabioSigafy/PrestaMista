@@ -20,17 +20,46 @@ class FormController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index(request $request)
+    public function index(Request $request)
     {
 
-
-
         $query = Form::query();
+        // $form = form::all();
 
-        if ($request->filled('search')) {
-            $query->where('name', 'LIKE', "%{$request->search}%");
+        // $user_id = Auth::id();
+        // $list_id = $request->route()->list_id;
+        // $list = Auth::user()->find($form->created_user_id);
+
+
+        // if($list->user->id === $user_id) {
+        //     return $next($request);
+        // } else {
+        //     $message = 'Você não é dono dessa lista!';
+
+        // return redirect()
+        //     ->route('error route')
+        //     ->with(compact('message'));
+        // }
+
+        if ($request->filled('status')) {
+            $query->where('inactive', 'LIKE', "%{$request->status}%");
 
         }
+        if ($request->filled('name')) {
+            $query->where('name', 'LIKE', "%{$request->name}%");
+
+        }
+        if ($request->filled('CPF')) {
+            $query->where('document', 'LIKE', "%{$request->CPF}%");
+
+        }
+        if ($request->filled('data')) {
+            $query->where('created_at', 'LIKE', "%{$request->data}%");
+
+        }
+
+
+
         $form = $query->orderBy('created_at', 'DESC')->paginate(6);
 
         return view('forms.index', [
@@ -45,7 +74,7 @@ class FormController extends Controller
         $remmenber =  isset($data['lembrar']) ? true : false;
 
         if(Auth::attempt(['email' => $data['email'], 'password' => $data['password']], $remmenber)){
-            return redirect('/');
+            return redirect('/forms');
         }else{
             return redirect('/');
         }
@@ -88,6 +117,7 @@ class FormController extends Controller
                     'name' => $request->name,
                     'date' => $request->date,
                     'deathcover' => $request->deathcover,
+                    'created_user_id' => auth()->user()->id,
                     'inactive' => 0
                 ]);
             } catch (Exception $e) {
@@ -140,11 +170,12 @@ class FormController extends Controller
     public function edit($id)
     {
         $form = form::find($id);
+        $createdUser = Auth::user()->find($form->created_user_id);
 
         return view('forms.edit', [
 
-            'form' => $form
-
+            'form' => $form,
+            'createdUser' => $createdUser
         ]);
     }
 

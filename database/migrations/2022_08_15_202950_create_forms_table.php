@@ -21,6 +21,7 @@ return new class extends Migration
             $table->date('date');
             $table->integer('inactive');
             $table->string('deathcover');
+            $table->foreignId('created_user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

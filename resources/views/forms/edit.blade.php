@@ -4,17 +4,16 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10 mt-3">
-                <div class="card">
-                    <div class="card-header text-black fw-bold text-center ">Adesão prestamista</div>
+                <div class="card shadow">
+                    <div class="card-header text-left ">Adesão prestamista</div>
                     <div class="card-body ">
 
                         <form class="row g-3" method="POST" action="{{ route('forms.update', [$form->id]) }}" role="ajax">
                         @csrf
                             {{method_field('PUT')}}
 
-                            <div class="mb-3">
-
-                                <div class="mb-3">
+                            <small>Criado por: {{ $createdUser->name }}</small>
+                            <div>
                                     <label class=" mb-2">Status</label>
 
                                     <div class="mx-auto"
@@ -29,10 +28,6 @@
                                         <label class="btn btn-outline-danger col-2" for="inactive">Desativado</label>
 
                                     </div>
-
-
-                                </div>
-
                             </div>
 
                             <div class="col-md-6">
@@ -57,7 +52,7 @@
                             </div>
 
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <button type="submit" class="btn btn-outline-primary">Editar</button>
+                                <button type="submit" class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
                             </div>
                         </form>
 
