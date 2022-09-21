@@ -3,20 +3,21 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-10 mt-3">
-                <div class="card shadow">
-                    <div class="card-header text-left ">Adesão prestamista</div>
+            <div class="col-md-7 mt-3">
+                <div class="card">
+                    <div class="card-header text-black fw-bold text-center ">Editar prestamista</div>
                     <div class="card-body ">
 
                         <form class="row g-3" method="POST" action="{{ route('forms.update', [$form->id]) }}" role="ajax">
                         @csrf
                             {{method_field('PUT')}}
 
-                            <small>Criado por: {{ $createdUser->name }}</small>
-                            <div>
-                                    <label class=" mb-2">Status</label>
+                            <div class="mb-3">
 
-                                    <div class="mx-auto"
+                                <div class="mb-0 text-center">
+                                    <label class="mb-2">Status</label>
+
+                                    <div class="mx-auto text-center"
                                         aria-label="Basic radio toggle button group">
 
                                         <input {{ $form->inactive == 0 ? 'checked' : '' }} type="radio" class="btn-check"
@@ -28,31 +29,50 @@
                                         <label class="btn btn-outline-danger col-2" for="inactive">Desativado</label>
 
                                     </div>
+
+
+                                </div>
+
                             </div>
 
-                            <div class="col-md-6">
-                                <label for="document" class="form-label">CPF</label>
-                                <input type="text" class="form-control mask-cpf" name="document" id="document"
-                                    value="{{ $form->document }}">
-                            </div>
-                            <div class="col-6">
-                                <label for="name" class="form-label">Nome</label>
-                                <input type="text" class="form-control" name="name" id="name"
-                                    value="{{ $form->name }}">
-                            </div>
-                            <div class="col-6">
-                                <label for="date" class="form-label">Data de nascimento</label>
-                                <input type="date" class="form-control" name="date" id="date"
-                                    value="{{ $form->date }}">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="deathcover" class="form-label">Capital</label>
-                                <input type="text" class="form-control mask-money" name="deathcover" id="deathcover"
-                                    value="{{ $form->deathcover }}">
+                            <div class="row mb-3">
+                                <label for="document" class="col-md-4 col-form-label text-md-end">CPF</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control mask-cpf" name="document" id="document" autofocus
+									value="{{ $form->document }}">
+                                </div>
                             </div>
 
-                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <button type="submit" class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
+                            <div class="row mb-3">
+                                <label for="name" class="col-md-4 col-form-label text-md-end">Nome</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name= "name" id="name" autofocus
+									value="{{ $form->name }}">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="date" class="col-md-4 col-form-label text-md-end">Data</label>
+
+                                <div class="col-md-6">
+                                    <input type="date" class="form-control" name="date" id="date" autofocus
+									value="{{ $form->date }}">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="deathcover" class="col-md-4 col-form-label text-md-end">Capital</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control mask-money" name="deathcover" id="deathcover" autofocus
+									value="{{ $form->deathcover }}">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">Editar</button>
                             </div>
                         </form>
 

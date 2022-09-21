@@ -22,41 +22,41 @@ class FormController extends Controller
 
     public function index(Request $request)
     {
-
         $query = Form::query();
-        // $form = form::all();
 
-        // $user_id = Auth::id();
-        // $list_id = $request->route()->list_id;
-        // $list = Auth::user()->find($form->created_user_id);
+        switch($query){
 
+            case $request->filled('status') :
+                $query->where('inactive', 'LIKE', "%{$request->status}%");
+                break;
+            case $request->filled('name') :
+                $query->where('name', 'LIKE', "%{$request->name}%");
+                break;
+            case $request->filled('CPF') :
+                $query->where('document', 'LIKE', "%{$request->CPF}%");
+                break;
+            case $request->filled('data') :
+                $query->where('created_at', 'LIKE', "%{$request->data}%");
+                break;
 
-        // if($list->user->id === $user_id) {
-        //     return $next($request);
-        // } else {
-        //     $message = 'Você não é dono dessa lista!';
+        }
 
-        // return redirect()
-        //     ->route('error route')
-        //     ->with(compact('message'));
+        // if ($request->filled('status')) {
+        //     $query->where('inactive', 'LIKE', "%{$request->status}%");
+
         // }
+        // if ($request->filled('name')) {
+        //     $query->where('name', 'LIKE', "%{$request->name}%");
 
-        if ($request->filled('status')) {
-            $query->where('inactive', 'LIKE', "%{$request->status}%");
+        // }
+        // if ($request->filled('CPF')) {
+        //     $query->where('document', 'LIKE', "%{$request->CPF}%");
 
-        }
-        if ($request->filled('name')) {
-            $query->where('name', 'LIKE', "%{$request->name}%");
+        // }
+        // if ($request->filled('data')) {
+        //     $query->where('created_at', 'LIKE', "%{$request->data}%");
 
-        }
-        if ($request->filled('CPF')) {
-            $query->where('document', 'LIKE', "%{$request->CPF}%");
-
-        }
-        if ($request->filled('data')) {
-            $query->where('created_at', 'LIKE', "%{$request->data}%");
-
-        }
+        // }
 
 
 
@@ -67,6 +67,7 @@ class FormController extends Controller
             'form' => $form
         ]);
     }
+
     public function auth(Request $request)
     {
 
