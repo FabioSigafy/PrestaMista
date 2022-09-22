@@ -61,9 +61,9 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="user-master" class="col-md-4 col-form-label text-md-end fw-bold">MASTER</label>
+                            <label for="user_master" class="col-md-4 col-form-label text-md-end fw-bold">MASTER</label>
                             <div class="col-md-6">
-                                <select name="user-master" class="form-select" id="user-master">
+                                <select name="user_master" class="form-select" id="user_master">
                                     <option value="0" selected>Não</option>
                                     <option value="1">Sim</option>
                                 </select>

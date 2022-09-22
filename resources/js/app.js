@@ -1,7 +1,9 @@
-import './bootstrap';
+import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js';
 import $ from "jquery";
 import swal from 'sweetalert';
 import 'jquery-mask-plugin';
+
+
 
 
 $(function () {
@@ -33,6 +35,9 @@ $(function () {
             globalActionReturnAjax(data)
         });
     });
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
 });
 
 function globalActionReturnAjax(data) {
@@ -46,6 +51,7 @@ function globalActionReturnAjax(data) {
     }
 
     myDataTable('#datatablesSimple');
+
 }
 
 function myDataTable(element){
