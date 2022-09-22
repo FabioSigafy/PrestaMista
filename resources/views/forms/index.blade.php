@@ -77,11 +77,11 @@
                                     @endphp
 
                                     <tr class="text-center rounded">
-                                        <td class="{{ $classOpacity }}{{ $segurado->inactive == 0 ? 'text-success' : '' }}">
+                                        <td class="{{ $classOpacity }}{{ $segurado->inactive == 0 ? 'text-success' : 'text-danger' }}">
                                             {{ $segurado->inactive == 0 ? 'Ativado' : 'Desativado' }}
                                         </td>
                                         <td class="{{ $classOpacity }}">{{ $segurado->document }}</td>
-                                        <td class="{{ $classOpacity }}">{{ $segurado->name }}</td>
+                                        <td class="{{ $classOpacity }}limited-content" data-bs-title="{{ $segurado->name }}" data-bs-toggle="tooltip">{{ $segurado->name }}</td>
                                         <td class="{{ $classOpacity }}">{{ $segurado->date }} </td>
                                         <td class="{{ $classOpacity }}">{{ $segurado->deathcover }} </td>
                                         <td class="{{ $classOpacity }}">
@@ -96,24 +96,16 @@
                                                     class="fa-solid fa-pen-to-square"></i></td>
                                     </tr>
                                 @endforeach
-
-
-                        </button>
-
                             </tbody>
-
+                            <div class="py-4 justify-content-center d-flex">
+                                {{ $form->appends(request()->query())->links() }}
+                            </div>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-    <div class="py-4 justify-content-center d-flex">
-        {{ $form->appends(request()->query())->links() }}
-    </div>
-
 
     <script>
         function Refresh() {

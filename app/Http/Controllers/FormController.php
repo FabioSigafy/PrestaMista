@@ -24,6 +24,7 @@ class FormController extends Controller
 
     public function index(Request $request)
     {
+
         $query = Form::query();
 
         switch($query){
