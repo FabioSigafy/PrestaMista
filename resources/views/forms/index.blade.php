@@ -97,10 +97,11 @@
                                     </tr>
                                 @endforeach
                             </tbody>
-                            <div class="py-4 justify-content-center d-flex">
-                                {{ $form->appends(request()->query())->links() }}
-                            </div>
+
                         </table>
+                        <div class="justify-content-center d-flex text-dark">
+                            {{ $form->appends(request()->query())->links() }}
+                        </div>
                     </div>
                 </div>
             </div>
