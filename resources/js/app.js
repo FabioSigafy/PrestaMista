@@ -1,12 +1,15 @@
-import './bootstrap';
+import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js';
 import $ from "jquery";
 import swal from 'sweetalert';
 import 'jquery-mask-plugin';
 
 
+
+
 $(function () {
     $('.mask-money').mask('000.000.000.000.000,00', { reverse: true });
     $('.mask-cpf').mask('000.000.000-00');
+    $('.mask-data').mask('00/00/0000');
 
     $('form[role="ajax"]').on('submit', function () {
         var route = $(this).attr('action');
@@ -33,6 +36,9 @@ $(function () {
             globalActionReturnAjax(data)
         });
     });
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
 });
 
 function globalActionReturnAjax(data) {
@@ -46,6 +52,7 @@ function globalActionReturnAjax(data) {
     }
 
     myDataTable('#datatablesSimple');
+
 }
 
 function myDataTable(element){

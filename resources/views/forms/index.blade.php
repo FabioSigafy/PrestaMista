@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-10 mt-3">
                 <div class="card shadow">
-                    <div class="card-header text-left ">Adesões prestamista</div>
+                    <div class="card-header text-left ">Seguro prestamista</div>
                     <form action="{{ route('forms.index') }}" method="get">
                         <div class="card-body ">
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -13,11 +13,9 @@
                                         class="fa-solid fa-plus"></i>
                                     Novo</a>
 
-                                @if (Auth::user()->{"user-master"} == 1)
+                                @if (Auth::user()->user_master)
                                     <a class="btn btn-outline-primary" href="{{ route('excel') }}" role="button"><i
                                             class="fa-solid fa-folder-open"></i> Relatório</a>
-                                    <a class="btn btn-outline-primary" href="{{ route('register') }}" role="button"><i
-                                            class="fa-solid fa-user"></i> Novo</a>
                                 @endif
 
                             </div>
@@ -40,9 +38,9 @@
                                         <option value="1">Desativado</option>
                                     </select>
 
-                                    <input class="p-2 rounded border " type="text " name="CPF" placeholder="CPF">
+                                    <input class="p-2 rounded border mask-cpf " type="text " name="CPF" placeholder="CPF">
                                     <input class="p-2 rounded border " type="text " name="name" placeholder="Nome">
-                                    <input type="date" class="p-2 rounded border " type="text " name="data"
+                                    <input class="p-2 rounded border mask-data " type="text " name="date"
                                         placeholder="Criado em">
                                     <button class="bg-primary rounded border p-2 text-light"><i
                                             class="fa-solid fa-magnifying-glass"></i> Pesquisar</button>
@@ -63,38 +61,44 @@
                                     <th>Data de nasc.</th>
                                     <th>Capital</th>
                                     <th>Criado em</th>
+
+                                    @if (Auth::user()->user_master)
+                                        <th>Criado por:</th>
+                                    @endif
+
                                     <th>&nbsp;</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($form as $segurado)
-                                    @if (Auth::user()->id == $segurado->created_user_id || Auth::user()->{"user-master"} == 1)
+                                    @php
+                                        $classOpacity = $segurado->inactive ? 'opacity-25 ' : '';
+                                        $classColor = $segurado->inactive ? ' btn btn-outline-dark btn-sm ' : ' btn btn-warning btn-sm';
+                                    @endphp
 
-                                        @php
-                                            $classOpacity = $segurado->inactive ? 'opacity-25 ' : '';
-                                            $classColor = $segurado->inactive ? ' btn btn-outline-dark btn-sm ' : ' btn btn-warning btn-sm';
-                                        @endphp
+                                    <tr class="text-center rounded">
+                                        <td class="{{ $classOpacity }}{{ $segurado->inactive == 0 ? 'text-success' : '' }}">
+                                            {{ $segurado->inactive == 0 ? 'Ativado' : 'Desativado' }}
+                                        </td>
+                                        <td class="{{ $classOpacity }}">{{ $segurado->document }}</td>
+                                        <td class="{{ $classOpacity }}">{{ $segurado->name }}</td>
+                                        <td class="{{ $classOpacity }}">{{ $segurado->date }} </td>
+                                        <td class="{{ $classOpacity }}">{{ $segurado->deathcover }} </td>
+                                        <td class="{{ $classOpacity }}">
+                                            {{ date('d/m/Y', strtotime($segurado->created_at)) }}</td>
 
-                                        <tr class="text-center rounded">
-                                            <td
-                                                class="{{ $classOpacity }}{{ $segurado->inactive == 0 ? 'text-success' : '' }}">
-                                                {{ $segurado->inactive == 0 ? 'Ativado' : 'Desativado' }}
-                                            </td>
-                                            <td class="{{ $classOpacity }}">{{ $segurado->document }}</td>
-                                            <td class="{{ $classOpacity }}">{{ $segurado->name }}</td>
-                                            <td class="{{ $classOpacity }}">{{ $segurado->date }} </td>
-                                            <td class="{{ $classOpacity }}">{{ $segurado->deathcover }} </td>
-                                            <td class="{{ $classOpacity }}">
-                                                {{ date('d/m/Y', strtotime($segurado->created_at)) }}</td>
-                                            {{-- H:i:s --}}
+                                            @if (Auth::user()->user_master)
+                                                <td class="{{ $classOpacity }} limited-content" data-bs-title="{{$segurado->user_creator}}" data-bs-toggle="tooltip" >{{$segurado->user_creator}}</td>
+                                            @endif
 
-                                            <td><a class="{{ $classColor }}"
-                                                    href="{{ route('forms.edit', [$segurado->id]) }}"><i
-                                                        class="fa-solid fa-pen-to-square"></i></td>
-
-                                        </tr>
-                                    @endif
+                                        <td><a class="{{ $classColor }}"
+                                                href="{{ route('forms.edit', [$segurado->id]) }}"><i
+                                                    class="fa-solid fa-pen-to-square"></i></td>
+                                    </tr>
                                 @endforeach
+
+
+                        </button>
 
                             </tbody>
 

@@ -38,21 +38,16 @@ class RegisterController extends Controller
      *
      * @return void
      */
+
     public function __construct()
 
     {
-         //  $this->middleware('guest');
-        $this->middleware('auth');
-        $this->middleware(function ($request, $next) {
+        /**
+         * Comentado pois não permite registrar um novo usuário quando está logado
+         * $this->middleware('guest');
+         */
 
-
-
-            $this->usuario = auth()->user(); //Aqui você pega o usuario logado
-
-            return $next($request);
-        });
-
-
+       $this->middleware('master');
     }
 
     /**
@@ -67,7 +62,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:100'],
             'email' => ['required', 'string', 'email', 'max:100', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'user-master' => ['required', 'integer']
+            'user_master' => ['required', 'integer']
         ]);
     }
 
@@ -83,12 +78,12 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'user-master' => $data['user-master']
+            'user_master' => $data['user_master']
 
         ]);
     }
-    public function index()
-    {
-        $servico = Auth::where('user_id', $this->usuario->id)->get(); // Com isso você vai sempre buscar (como no meu caso) os serviços do usuário logado, ou seja, nessa rota cada usuário só vai conseguir ver seus serviços
-    }
+    // public function index()
+    // {
+    //     $servico = Auth::where('user_id', $this->usuario->id)->get(); // Com isso você vai sempre buscar (como no meu caso) os serviços do usuário logado, ou seja, nessa rota cada usuário só vai conseguir ver seus serviços
+    // }
 }

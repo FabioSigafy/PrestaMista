@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-7 mt-3">
                 <div class="card">
-                    <div class="card-header text-black fw-bold text-center ">Editar prestamista</div>
+                    <div class="card-header text-black text-left ">Editar seguro prestamista</div>
                     <div class="card-body ">
 
                         <form class="row g-3" method="POST" action="{{ route('forms.update', [$form->id]) }}" role="ajax">
@@ -13,6 +13,7 @@
                             {{method_field('PUT')}}
 
                             <div class="mb-3">
+
 
                                 <div class="mb-0 text-center">
                                     <label class="mb-2">Status</label>
@@ -57,7 +58,7 @@
                                 <label for="date" class="col-md-4 col-form-label text-md-end">Data</label>
 
                                 <div class="col-md-6">
-                                    <input type="date" class="form-control" name="date" id="date" autofocus
+                                    <input type="text" class="form-control mask-data" name="date" id="date" autofocus
 									value="{{ $form->date }}">
                                 </div>
                             </div>

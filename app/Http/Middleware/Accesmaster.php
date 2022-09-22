@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,14 +22,18 @@ class Accesmaster
 
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->master == 1)
+        $user = User::all();
 
+        if(Auth::check()){
+            if(Auth::user()->user_master){
+                return $next($request);
+            }else{
+                return redirect(route('forms.index'));
+            }
+        }else if(!$user->count()){
             return $next($request);
-
-        else {
-            if (!Auth::user())
-
-                return redirect('register');
+        }else{
+            return redirect(route('login'));
         }
     }
 }

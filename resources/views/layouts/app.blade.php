@@ -11,15 +11,10 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ mix('js/app.js') }}" defer></script>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/js/all.min.js"></script>
-
-
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 
 
     <!-- Fonts -->
@@ -27,24 +22,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    <style>
-        .navbar-brand {
-            background-color: #ffffff;
-
-        }
-
-        .a {
-
-            color: white;
-        }
-        body {
-            background-color: #4A4D5F;
-            font-family: Tahoma, sans-serif;
-
-        }
-    </style>
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -55,8 +33,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('forms') }}">
-                    <img src="https://app.sigafy.com.br/images/pages/login/login.png" width="110px"
-                        height="60px">
+                    <img src="https://app.sigafy.com.br/images/pages/login/login.png" width="110px" height="60px">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -81,24 +58,19 @@
                                 </li>
                             @endif
 
-                            {{-- @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Registrar') }}</a>
-                                </li>
-                            @endif --}}
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Prestamista
+                                    Seguro Prestamista
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <a class="dropdown-item" href="{{ route('forms.create') }}">
-                                        Criar
+                                        <i class="fa-solid fa-plus"></i> Novo Registro
                                     </a>
                                     <a class="dropdown-item" href="{{ route('forms.index') }}">
-                                        Listagem
+                                        <i class="fa-solid fa-list"></i> Listagem
                                     </a>
                                 </div>
                             </li>
@@ -110,10 +82,17 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+
+                                    @if (Auth::user()->user_master)
+                                    <a class="dropdown-item" href="{{ route('register') }}" role="button"><i
+                                        class="fa-solid fa-user"></i> Novo Usuário
+                                    </a>
+                                    @endif
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Sair') }}
+                                        <i class="fa-solid fa-right-from-bracket"></i> {{ __('Sair') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

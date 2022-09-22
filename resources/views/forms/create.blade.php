@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-7">
                 <div class="card">
-                    <div class="card-header">Criar prestamista</div>
+                    <div class="card-header">Criar seguro prestamista</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('forms.store') }}" role="ajax">
@@ -27,10 +27,10 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="date" class="col-md-4 col-form-label text-md-end">Data</label>
+                                <label for="text" class="col-md-4 col-form-label text-md-end">Data</label>
 
                                 <div class="col-md-6">
-                                    <input type="date" class="form-control" name="date" id="date" autofocus>
+                                    <input type="text" class="form-control mask-data" name="date" id="date" autofocus>
                                 </div>
                             </div>
 

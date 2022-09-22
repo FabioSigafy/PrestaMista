@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('document');
             $table->string('documentRegistry');
             $table->text('name');
-            $table->date('date');
+            $table->string('date');
             $table->integer('inactive');
             $table->string('deathcover');
             $table->foreignId('created_user_id')->constrained('users')->onDelete('cascade');

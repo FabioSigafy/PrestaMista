@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Exports\FormsExport;
 use App\Models\form;
 use Exception;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use League\CommonMark\Node\Block\Document;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Auth;
+
 
 class FormController extends Controller
 {
@@ -41,30 +43,17 @@ class FormController extends Controller
 
         }
 
-        // if ($request->filled('status')) {
-        //     $query->where('inactive', 'LIKE', "%{$request->status}%");
+        if(Auth::user()->user_master != 1){
+            $query->where('created_user_id', Auth::user()->id);
+        }
 
-        // }
-        // if ($request->filled('name')) {
-        //     $query->where('name', 'LIKE', "%{$request->name}%");
-
-        // }
-        // if ($request->filled('CPF')) {
-        //     $query->where('document', 'LIKE', "%{$request->CPF}%");
-
-        // }
-        // if ($request->filled('data')) {
-        //     $query->where('created_at', 'LIKE', "%{$request->data}%");
-
-        // }
-
-
+        $query->addSelect(['user_creator' => User::select('name')->whereColumn('forms.created_user_id', 'id')->limit(1)]);
 
         $form = $query->orderBy('created_at', 'DESC')->paginate(6);
 
         return view('forms.index', [
 
-            'form' => $form
+            'form' => $form,
         ]);
     }
 
@@ -171,7 +160,7 @@ class FormController extends Controller
     public function edit($id)
     {
         $form = form::find($id);
-        $createdUser = Auth::user()->find($form->created_user_id);
+        $createdUser = User::find($form->created_user_id);
 
         return view('forms.edit', [
 
@@ -208,7 +197,7 @@ class FormController extends Controller
                     'inactive' => $request->inactive
                 ]);
             } catch (Exception $e) {
-                $errors[] = 'Erro ao alterar prestamista no banco de dados';
+                $errors[] = 'Erro ao alterar prestamista no banco de dados' .$e->getMessage();
             }
         }
 
